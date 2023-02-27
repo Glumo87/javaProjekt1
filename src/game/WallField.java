@@ -7,9 +7,11 @@ import common.MazeObject;
 public class WallField implements Field {
     private int row;
     private int column;
+    private boolean hasObject;
     public WallField(int row, int column) {
         this.row=row;
         this.column=column;
+        this.hasObject=false;
     }
 
     @Override
@@ -54,5 +56,8 @@ public class WallField implements Field {
     @Override
     public void setMaze(Maze maze) {
 
+    }
+    public void toggleHasObject() {
+        this.hasObject=!this.hasObject;
     }
 }

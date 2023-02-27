@@ -8,7 +8,7 @@ public class PathField implements Field {
 
     private int row;
     private int column;
-
+    private boolean hasObject;
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof PathField) {
@@ -20,6 +20,7 @@ public class PathField implements Field {
     public PathField(int row, int column) {
         this.row=row;
         this.column=column;
+        this.hasObject=false;
     }
     @Override
     public boolean canMove() {
@@ -54,5 +55,8 @@ public class PathField implements Field {
     @Override
     public void setMaze(Maze maze) {
 
+    }
+    public void toggleHasObject() {
+        this.hasObject=!this.hasObject;
     }
 }
