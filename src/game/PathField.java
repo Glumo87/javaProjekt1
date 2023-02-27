@@ -34,7 +34,7 @@ public class PathField implements Field {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return !hasObject;
     }
 
     @Override
