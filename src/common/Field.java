@@ -17,5 +17,4 @@ public interface Field {
        /* public int deltaRow();
         public int deltaCol();*/
     }
-s
 }
