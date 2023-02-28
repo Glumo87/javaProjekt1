@@ -8,12 +8,19 @@ public class WallField implements Field {
     private int row;
     private int column;
     private boolean hasObject;
+
+    private MazeObject mazeObject;
     public WallField(int row, int column) {
         this.row=row;
         this.column=column;
         this.hasObject=false;
+        this.mazeObject=null;
     }
-
+    public WallField(int row, int column,boolean hasObject) {
+        this.row=row;
+        this.column=column;
+        this.hasObject=hasObject;
+    }
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof WallField) {

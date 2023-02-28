@@ -2,6 +2,7 @@ package game;
 
 import common.Field;
 import common.Maze;
+import common.MazeObject;
 
 public class GameMaze implements Maze {
     private Field[][] fieldArray;
@@ -24,17 +25,27 @@ public class GameMaze implements Maze {
                     if (maze[i].charAt(j)=='X') {
                         fieldArray[i][j]=new WallField(i,j);
                     }
+                    else if (maze[i].charAt(j)=='S') {
+                        fieldArray[i][j]=new PathField(i,j);
+                        fieldArray[i][j].put(new PacmanObject(fieldArray[i][j]));
+                    }
                     else {
                         fieldArray[i][j]=new PathField(i,j);
                     }
                 }
             }
         }
-        return new GameMaze(fieldArray,rows+2,columns+2);
+        GameMaze newMaze= new GameMaze(fieldArray,rows+2,columns+2);
+        for (int i =0;i<rows+2;i++)
+            for (int j =0;j<rows+2;j++)
+                fieldArray[i][j].setMaze(newMaze);
+        return newMaze;
     }
 
     @Override
     public Field getField(int row, int col) {
+        if(row>=this.numRows()||col>=this.numCols()||row<0||col<0)
+            return null;
         return fieldArray[row][columns];
     }
 

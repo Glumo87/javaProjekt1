@@ -8,7 +8,8 @@ public class PathField implements Field {
 
     private int row;
     private int column;
-    private boolean hasObject;
+    private MazeObject mazeObject;
+    private Maze maze;
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof PathField) {
@@ -20,7 +21,8 @@ public class PathField implements Field {
     public PathField(int row, int column) {
         this.row=row;
         this.column=column;
-        this.hasObject=false;
+        this.mazeObject=null;
+        this.maze=null;
     }
     @Override
     public boolean canMove() {
@@ -29,34 +31,52 @@ public class PathField implements Field {
 
     @Override
     public MazeObject get() {
-        return null;
+        return this.mazeObject;
     }
 
     @Override
     public boolean isEmpty() {
-        return !hasObject;
+        return this.mazeObject==null;
     }
 
     @Override
     public boolean remove(MazeObject object) {
-        return false;
+        if (object!=this.mazeObject)
+            return false;
+        this.mazeObject=null;
+        return true;
     }
 
     @Override
     public boolean put(MazeObject object) {
+        if(this.isEmpty()) {
+            this.mazeObject=object;
+            return true;
+        }
         return false;
     }
 
     @Override
     public Field nextField(Direction dirs) {
-        return null;
+        if (this.maze==null)
+            return null;
+        switch (dirs) {
+            case D:
+                return this.maze.getField(this.row+1,this.column);
+            case L:
+                return this.maze.getField(this.row,this.column-1);
+            case R:
+                return this.maze.getField(this.row,this.column+1);
+            case U:
+                return this.maze.getField(this.row-1,this.column);
+            default:
+                return null;
+        }
     }
 
     @Override
     public void setMaze(Maze maze) {
+        this.maze=maze;
+    }
 
-    }
-    public void toggleHasObject() {
-        this.hasObject=!this.hasObject;
-    }
 }

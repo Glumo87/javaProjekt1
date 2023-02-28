@@ -1,26 +1,25 @@
 package game;
 
 import common.Field;
-import common.Maze;
 import common.MazeObject;
 
 public class PacmanObject implements MazeObject {
-    private int row;
-    private int column;
-    private Maze maze;
-    public PacmanObject(int row, int column, Maze maze) {
-        this.row=row;
-        this.column=column;
-        this.maze=maze;
+    private Field field;
+    public PacmanObject(Field field) {
+        this.field=field;
     }
     @Override
     public boolean canMove(Field.Direction dir) {
-
-        return false;
+        return this.field.nextField(dir).canMove();
     }
+
 
     @Override
     public boolean move(Field.Direction dir) {
-        return false;
+        Field temp=this.field.nextField(dir);
+        temp.put(this);
+        this.field.remove(this);
+        this.field=temp;
+        return true;
     }
 }
