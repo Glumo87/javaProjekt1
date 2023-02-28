@@ -7,19 +7,13 @@ import common.MazeObject;
 public class WallField implements Field {
     private int row;
     private int column;
-    private boolean hasObject;
-
     private MazeObject mazeObject;
+    private Maze maze;
     public WallField(int row, int column) {
         this.row=row;
         this.column=column;
-        this.hasObject=false;
         this.mazeObject=null;
-    }
-    public WallField(int row, int column,boolean hasObject) {
-        this.row=row;
-        this.column=column;
-        this.hasObject=hasObject;
+        this.maze=null;
     }
     @Override
     public boolean equals(Object obj) {
@@ -37,34 +31,56 @@ public class WallField implements Field {
 
     @Override
     public MazeObject get() {
-        return null;
+        return this.mazeObject;
     }
 
     @Override
     public boolean isEmpty() {
+        return this.mazeObject==null;
+    }
+
+    @Override
+    public boolean remove(MazeObject object) throws UnsupportedOperationException{
+        if(!this.canMove())
+            throw new UnsupportedOperationException("Cannot remove object from this type of field\n");
+        if (object!=this.mazeObject)
+            return false;
+        this.mazeObject=null;
+        return true;
+    }
+
+    @Override
+    public boolean put(MazeObject object) throws UnsupportedOperationException{
+        if(!this.canMove())
+            throw new UnsupportedOperationException("Cannot put object on this type of field\n");
+        if(this.isEmpty()) {
+            this.mazeObject=object;
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean remove(MazeObject object) {
-        return false;
-    }
-
-    @Override
-    public boolean put(MazeObject object) {
-        return false;
-    }
-
-    @Override
-    public Field nextField(Direction dirs) {
-        return null;
+    public Field nextField(Direction dirs) throws UnsupportedOperationException{
+        if(!this.canMove())
+            throw new UnsupportedOperationException("Cannot find next field from this field\n");
+        if (this.maze==null)
+            return null;
+        switch (dirs) {
+            case D:
+                return this.maze.getField(this.row+1,this.column);
+            case L:
+                return this.maze.getField(this.row,this.column-1);
+            case R:
+                return this.maze.getField(this.row,this.column+1);
+            case U:
+                return this.maze.getField(this.row-1,this.column);
+            default:
+                return null;
+        }
     }
 
     @Override
     public void setMaze(Maze maze) {
-
-    }
-    public void toggleHasObject() {
-        this.hasObject=!this.hasObject;
-    }
-}
+        this.maze=maze;
+    }}

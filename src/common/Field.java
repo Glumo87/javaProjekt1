@@ -5,14 +5,14 @@ public interface Field {
     MazeObject get();
     boolean isEmpty();
 
-    boolean remove(MazeObject object);
+    boolean remove(MazeObject object) throws UnsupportedOperationException;
 
-    boolean put(MazeObject object);
+    boolean put(MazeObject object) throws UnsupportedOperationException;
 
-    Field nextField(Field.Direction dirs);
+    Field nextField(Field.Direction dirs) throws UnsupportedOperationException;
 
     void setMaze(Maze maze);
-    static enum Direction {
+    enum Direction {
         D,L,R,U;
        /* public int deltaRow();
         public int deltaCol();*/

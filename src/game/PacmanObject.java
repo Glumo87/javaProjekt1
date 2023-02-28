@@ -13,13 +13,20 @@ public class PacmanObject implements MazeObject {
         return this.field.nextField(dir).canMove();
     }
 
-
+    public void setField(Field field) {
+        this.field=field;
+    }
     @Override
     public boolean move(Field.Direction dir) {
-        Field temp=this.field.nextField(dir);
-        temp.put(this);
-        this.field.remove(this);
-        this.field=temp;
+        try {
+            Field temp = this.field.nextField(dir);
+            temp.put(this);
+            this.field.remove(this);
+            setField(temp);
+        }
+        catch(UnsupportedOperationException ex) {
+            System.err.println(ex.getMessage());
+        }
         return true;
     }
 }
