@@ -12,11 +12,8 @@ public class PathField implements Field {
     private Maze maze;
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof PathField) {
-            if (((PathField) obj).column == this.column && ((PathField) obj).row == this.row)
-                return true;
-        }
-        return false;
+        return obj instanceof PathField &&
+                ((PathField) obj).column == this.column && ((PathField) obj).row == this.row;
     }
     public PathField(int row, int column) {
         this.row=row;

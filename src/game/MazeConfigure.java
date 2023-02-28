@@ -1,37 +1,46 @@
 package game;
 
+import common.Maze;
+
 public class MazeConfigure {
     private int rows;
     private int columns;
     private boolean canRead;
+    private boolean isValid;
     private int linesRead;
-    private String[] maze;
+    private String[] mazeMap;
     public MazeConfigure() {
         linesRead=0;
         canRead=false;
+        isValid=true;
     }
     public void startReading(int rows, int columns) {
         this.rows=rows;
         this.columns=columns;
         this.canRead=true;
-        this.maze=new String[rows];
+        this.mazeMap=new String[rows];
     }
     public boolean processLine(String line) {
         if(!canRead) {
+            this.isValid=false;
             return false;
         }
         else {
             if (line.length()>this.columns||line.length()<this.columns) {
+                this.isValid=false;
                 return false;
             }
             else {
                 char c;
                 for(int i =0;i<this.columns;i++) {
                     c=line.charAt(i);
-                    if(c!='.'&&c!='S' && c!='X')
+                    if(c!='.'&&c!='S' && c!='X') {
+                        this.isValid=false;
                         return false;
+                    }
+
                 }
-                maze[linesRead++]=line;
+                mazeMap[linesRead++]=line;
                 return true;
             }
         }
@@ -40,6 +49,10 @@ public class MazeConfigure {
         this.canRead=false;
         return true;
     }
-
+    public Maze createMaze() {
+        if (linesRead!=this.rows || !isValid)
+            return null;
+        return GameMaze.createGameMaze(this.mazeMap,this.rows,this.columns);
+    }
 }
 

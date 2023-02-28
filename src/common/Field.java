@@ -13,8 +13,6 @@ public interface Field {
 
     void setMaze(Maze maze);
     enum Direction {
-        D,L,R,U;
-       /* public int deltaRow();
-        public int deltaCol();*/
+        D,L,R,U
     }
 }

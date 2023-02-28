@@ -2,7 +2,7 @@ package game;
 
 import common.Field;
 import common.Maze;
-import common.MazeObject;
+
 
 public class GameMaze implements Maze {
     private Field[][] fieldArray;

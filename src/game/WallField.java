@@ -17,11 +17,8 @@ public class WallField implements Field {
     }
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof WallField) {
-            if (((WallField) obj).column == this.column && ((WallField) obj).row == this.row)
-                return true;
-        }
-        return false;
+        return obj instanceof WallField &&
+                ((WallField) obj).column == this.column && ((WallField) obj).row == this.row;
     }
 
     @Override
