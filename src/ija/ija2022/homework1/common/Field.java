@@ -1,4 +1,4 @@
-package common;
+package ija.ija2022.homework1.common;
 
 public interface Field {
     boolean canMove();

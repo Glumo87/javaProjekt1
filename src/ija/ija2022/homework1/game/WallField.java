@@ -1,8 +1,8 @@
-package game;
+package ija.ija2022.homework1.game;
 
-import common.Field;
-import common.Maze;
-import common.MazeObject;
+import ija.ija2022.homework1.common.Field;
+import ija.ija2022.homework1.common.Maze;
+import ija.ija2022.homework1.common.MazeObject;
 
 public class WallField implements Field {
     private int row;

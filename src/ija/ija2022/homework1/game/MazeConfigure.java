@@ -1,6 +1,6 @@
-package game;
+package ija.ija2022.homework1.game;
 
-import common.Maze;
+import ija.ija2022.homework1.common.Maze;
 
 public class MazeConfigure {
     private int rows;

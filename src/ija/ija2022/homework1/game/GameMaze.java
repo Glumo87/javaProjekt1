@@ -1,7 +1,7 @@
-package game;
+package ija.ija2022.homework1.game;
 
-import common.Field;
-import common.Maze;
+import ija.ija2022.homework1.common.Field;
+import ija.ija2022.homework1.common.Maze;
 
 
 public class GameMaze implements Maze {
@@ -22,10 +22,10 @@ public class GameMaze implements Maze {
                     fieldArray[i][j]=new WallField(i,j);
                 }
                 else {
-                    if (maze[i].charAt(j)=='X') {
+                    if (maze[i-1].charAt(j-1)=='X') {
                         fieldArray[i][j]=new WallField(i,j);
                     }
-                    else if (maze[i].charAt(j)=='S') {
+                    else if (maze[i-1].charAt(j-1)=='S') {
                         fieldArray[i][j]=new PathField(i,j);
                         fieldArray[i][j].put(new PacmanObject(fieldArray[i][j]));
                     }
@@ -37,7 +37,7 @@ public class GameMaze implements Maze {
         }
         GameMaze newMaze= new GameMaze(fieldArray,rows+2,columns+2);
         for (int i =0;i<rows+2;i++)
-            for (int j =0;j<rows+2;j++)
+            for (int j =0;j<columns+2;j++)
                 fieldArray[i][j].setMaze(newMaze);
         return newMaze;
     }
@@ -46,7 +46,7 @@ public class GameMaze implements Maze {
     public Field getField(int row, int col) {
         if(row>=this.numRows()||col>=this.numCols()||row<0||col<0)
             return null;
-        return fieldArray[row][columns];
+        return fieldArray[row][col];
     }
 
     @Override

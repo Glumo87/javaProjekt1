@@ -1,7 +1,7 @@
-package game;
+package ija.ija2022.homework1.game;
 
-import common.Field;
-import common.MazeObject;
+import ija.ija2022.homework1.common.Field;
+import ija.ija2022.homework1.common.MazeObject;
 
 public class PacmanObject implements MazeObject {
     private Field field;
@@ -26,6 +26,7 @@ public class PacmanObject implements MazeObject {
         }
         catch(UnsupportedOperationException ex) {
             System.err.println(ex.getMessage());
+            return false;
         }
         return true;
     }
